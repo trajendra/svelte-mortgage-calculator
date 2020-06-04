@@ -1,0 +1,12 @@
+{
+  "version": 3,
+  "file": "bundle.css",
+  "sources": [
+    "..\\..\\App.svelte"
+  ],
+  "sourcesContent": [
+    "<script>\n\tvar formatter = new Intl.NumberFormat(\"en-US\", {\n\t\tstyle: \"currency\",\n\t\tcurrency: \"USD\"\n\t});\n\n\tlet years =15;\n\tlet loanamount = 500000;\n\tlet interestrateinput = 200;\n\t$: interestrate = interestrateinput / 100;\n\t$: totalpayments = years * 12;\n\t$: monthlyinterestrate = interestrate / 100 /12;\n\t$: monthlypayment = (loanamount *\n      Math.pow(1 + monthlyinterestrate, totalpayments) *\n      monthlyinterestrate) /\n    (Math.pow(1 + monthlyinterestrate, totalpayments) - 1);\n\n\t$: totalpaid = monthlypayment * totalpayments;\n   \t$: interestpaid = totalpaid - loanamount;\n\n</script>\n<style>\n\t.outputs {\n\t\tfont-size: 20px;\n\t\tborder: solid black 2px;\n\t\tmargin-top: 15px;\n\t\ttext-align: center;\n\t}\n</style>\n<main class=\"container\">\n\t<div class=\"row\">\n\t\t<h1> Mortgage Calculator </h1>\n\t</div>\n\t<div class=\"row\">\n\t\t<label> Loan Amount </label>\n\t\t<input\n\t\t min=\"1\"\n\t\t placeholder={loanamount}\n\t\t type=\"number\"\n\t\t class=\"u-full-width\" \n\t\t bind:value={loanamount}/>\n\t</div>\n\t\n\t<div class=\"row\">\n\t\t<div class=\"columns six\">\n\t\t\t<label> years </label>\n\t\t\t<input type=\"range\" min=\"1\" max=\"50\" \n\t\t\tclass=\"u-full-width\" \n\t\t\tbind:value={years} />\n\t\t</div>\n\t\t<div class =\"columns six outputs\"> {years} years </div>\n\t</div>\n\n\t<div class=\"row\">\n\t\t<div class=\"columns six\">\n\t\t\t<label> Interest Rate </label>\n\t\t\t<input type=\"range\" min=\"1\" max=\"2000\" \n\t\t\tclass=\"u-full-width\" \n\t\t\tbind:value={interestrateinput} />\n\t\t</div>\n\t\t<div class =\"columns six outputs\"> {interestrate.toFixed(2)} %</div>\n\t</div>\n\n\t<div class=\"row outputs\"> Monthly Payments {formatter.format(monthlypayment)} </div>\n\t<div class=\"row outputs\"> Total Paid {formatter.format(totalpaid)} </div>\n\t<div class=\"row outputs\"> Interest Paid {formatter.format(interestpaid)} </div>\n\n\n\n\n</main>"
+  ],
+  "names": [],
+  "mappings": "AAsBC,QAAQ,cAAC,CAAC,AACT,SAAS,CAAE,IAAI,CACf,MAAM,CAAE,KAAK,CAAC,KAAK,CAAC,GAAG,CACvB,UAAU,CAAE,IAAI,CAChB,UAAU,CAAE,MAAM,AACnB,CAAC"
+}
